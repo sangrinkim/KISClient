@@ -4,7 +4,7 @@ KIS Client Repository
 # Repository Map
 - root
   + src
-    + KISClientLib
+    + KISClient.Core
 
 # Feature List
 - OAuth 
