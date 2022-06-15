@@ -8,7 +8,7 @@ using System.Net.Http.Headers;
 using System.Net.Mime;
 using System.Text;
 
-namespace KISClientLib
+namespace KISClient.Core
 {
     /// <summary>
     /// References: 
