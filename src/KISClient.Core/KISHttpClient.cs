@@ -16,7 +16,7 @@ namespace KISClient.Core
     /// https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclient?view=netcore-3.1
     /// https://docs.microsoft.com/en-us/aspnet/web-api/overview/advanced/calling-a-web-api-from-a-net-client
     /// </summary>
-    public class KISClient
+    public class KISHttpClient
     {
         private readonly string REAL_SERVER_URL = @"https://openapi.koreainvestment.com:9443/";
         private static readonly HttpClient Client = new HttpClient();
@@ -27,7 +27,7 @@ namespace KISClient.Core
         private string AppSecret;
 
         
-        public KISClient(string appkey, string appsecret)
+        public KISHttpClient(string appkey, string appsecret)
         {
             this.AppKey = appkey;
             this.AppSecret = appsecret;
