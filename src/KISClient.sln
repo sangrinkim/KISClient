@@ -5,6 +5,8 @@ VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KISClient.Core", "KISClient.Core\KISClient.Core.csproj", "{EF9E655B-59DF-4F8C-9DB4-84AEA3AF2F9A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KISClient.Tests", "KISClient.Tests\KISClient.Tests.csproj", "{4E4B08F5-07F0-4486-B62A-A9F1B4FE38CD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{EF9E655B-59DF-4F8C-9DB4-84AEA3AF2F9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF9E655B-59DF-4F8C-9DB4-84AEA3AF2F9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF9E655B-59DF-4F8C-9DB4-84AEA3AF2F9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E4B08F5-07F0-4486-B62A-A9F1B4FE38CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E4B08F5-07F0-4486-B62A-A9F1B4FE38CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E4B08F5-07F0-4486-B62A-A9F1B4FE38CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E4B08F5-07F0-4486-B62A-A9F1B4FE38CD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
