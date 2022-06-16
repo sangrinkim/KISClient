@@ -37,7 +37,7 @@ namespace KISClient.Core
             Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        public void GetHashKey(string accountNo)
+        public bool GetHashKey(string accountNo)
         {
             Client.DefaultRequestHeaders.Add("appkey", this.AppKey);
             Client.DefaultRequestHeaders.Add("appsecret", this.AppSecret);
@@ -52,14 +52,10 @@ namespace KISClient.Core
                 var responseData = (JObject)JsonConvert.DeserializeObject(resonseString);
                 this.HashKey = responseData["HASH"].Value<string>();
 
-                //Console.WriteLine(resonseString);
-                //Console.WriteLine(Hashkey);
-                Console.WriteLine("Got HashKey");
+                return true;
             }
-            else
-            {
-                Console.WriteLine("Fail HashKey: {0}", response.StatusCode);
-            }
+
+            return false;
         }
 
         public void GetAccessToken()
