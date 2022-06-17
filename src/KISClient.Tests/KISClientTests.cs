@@ -18,12 +18,20 @@ namespace KISClient.Tests
         }
 
         [Fact]
-        public void GetHashkey()
+        public void GetHashkeyTest()
         {
             bool result = client.GetHashKey("your account no");
 
             // Expected: True
-            Assert.True(result, String.Format("Failed to get hashkey"));
+            Assert.True(result, "Failed to get hashkey");
+        }
+
+        [Fact]
+        public void GetAccessTokenTest()
+        {
+            bool result = client.GetAccessToken();
+
+            Assert.True(result, "Failed to get access token");
         }
     }
 }
