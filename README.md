@@ -5,6 +5,7 @@ KIS Client Repository
 - root
   + src
     + KISClient.Core
+    + KISClient.Tests
 
 # Feature List
 - OAuth 
