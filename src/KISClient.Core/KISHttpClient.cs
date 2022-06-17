@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.WebUtilities;
+﻿using KISClient.Core.Model;
+using Microsoft.AspNetCore.WebUtilities;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -23,6 +24,8 @@ namespace KISClient.Core
 
         private string Hashkey;
         private string AccessToken;
+        //private AccessTokenModel AccessToken;
+
         private string Appkey;
         private string Appsecret;
 
