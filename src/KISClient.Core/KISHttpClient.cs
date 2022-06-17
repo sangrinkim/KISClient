@@ -23,8 +23,8 @@ namespace KISClient.Core
         private static readonly HttpClient Client = new HttpClient();
 
         private string Hashkey;
-        private string AccessToken;
-        //private AccessTokenModel AccessToken;
+        //private string AccessToken;
+        private AccessTokenModel AccessToken;
 
         private string Appkey;
         private string Appsecret;
@@ -61,27 +61,23 @@ namespace KISClient.Core
             return false;
         }
 
-        public void GetAccessToken()
+        public bool GetAccessToken()
         {
             HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "/oauth2/tokenP");
             request.Content = new StringContent($"{{\"grant_type\":\"client_credentials\", \"appkey\":\"{ this.Appkey }\", \"appsecret\":\"{ this.Appsecret }\"}}",
                                                 Encoding.UTF8);
 
             HttpResponseMessage response = Client.SendAsync(request).Result;
+            string responseString = null;
             if (response.IsSuccessStatusCode)
             {
-                string resonseString = response.Content.ReadAsStringAsync().Result;
-                var responseData = (JObject)JsonConvert.DeserializeObject(resonseString);
-                this.AccessToken = responseData["access_token"].Value<string>();
+                responseString = response.Content.ReadAsStringAsync().Result;
+                this.AccessToken = JsonConvert.DeserializeObject<AccessTokenModel>(responseString);
 
-                //Console.WriteLine(resonseString);
-                //Console.WriteLine(AccessToken);
-                Console.WriteLine("Got AccessToken");
+                return true;
             }
-            else
-            {
-                Console.WriteLine("Fail Access Token: {0}", response.StatusCode);
-            }
+
+            return false;
         }
 
         public void RevokeToken()
