@@ -21,16 +21,16 @@ namespace KISClient.Core
         private readonly string REAL_SERVER_URL = @"https://openapi.koreainvestment.com:9443/";
         private static readonly HttpClient Client = new HttpClient();
 
-        private string HashKey;
+        private string Hashkey;
         private string AccessToken;
-        private string AppKey;
-        private string AppSecret;
+        private string Appkey;
+        private string Appsecret;
 
         
         public KISHttpClient(string appkey, string appsecret)
         {
-            this.AppKey = appkey;
-            this.AppSecret = appsecret;
+            this.Appkey = appkey;
+            this.Appsecret = appsecret;
 
             Client.BaseAddress = new Uri(REAL_SERVER_URL);
             Client.DefaultRequestHeaders.Accept.Clear();
@@ -39,8 +39,8 @@ namespace KISClient.Core
 
         public bool GetHashKey(string accountNo)
         {
-            Client.DefaultRequestHeaders.Add("appkey", this.AppKey);
-            Client.DefaultRequestHeaders.Add("appsecret", this.AppSecret);
+            Client.DefaultRequestHeaders.Add("appkey", this.Appkey);
+            Client.DefaultRequestHeaders.Add("appsecret", this.Appsecret);
             HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "/uapi/hashkey");
             request.Content = new StringContent($"{{\"CANO\":\"{ accountNo }\", \"ACNT_PRDT_CD\":\"01\", \"OVRS_EXCG_CD\":\"SHAA\"}}",
                                                 Encoding.UTF8);
@@ -50,7 +50,7 @@ namespace KISClient.Core
             {
                 string resonseString = response.Content.ReadAsStringAsync().Result;
                 var responseData = (JObject)JsonConvert.DeserializeObject(resonseString);
-                this.HashKey = responseData["HASH"].Value<string>();
+                this.Hashkey = responseData["HASH"].Value<string>();
 
                 return true;
             }
@@ -61,7 +61,7 @@ namespace KISClient.Core
         public void GetAccessToken()
         {
             HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "/oauth2/tokenP");
-            request.Content = new StringContent($"{{\"grant_type\":\"client_credentials\", \"appkey\":\"{ this.AppKey }\", \"appsecret\":\"{ this.AppSecret }\"}}",
+            request.Content = new StringContent($"{{\"grant_type\":\"client_credentials\", \"appkey\":\"{ this.Appkey }\", \"appsecret\":\"{ this.Appsecret }\"}}",
                                                 Encoding.UTF8);
 
             HttpResponseMessage response = Client.SendAsync(request).Result;
@@ -84,7 +84,7 @@ namespace KISClient.Core
         public void RevokeToken()
         {
             HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "/oauth2/revokeP");
-            request.Content = new StringContent($"{{\"appkey\":\"{ this.AppKey }\", \"appsecret\":\"{ this.AppSecret }\", \"token\":\"{ this.AccessToken }\"}}",
+            request.Content = new StringContent($"{{\"appkey\":\"{ this.Appkey }\", \"appsecret\":\"{ this.Appsecret }\", \"token\":\"{ this.AccessToken }\"}}",
                                                 Encoding.UTF8);
 
             HttpResponseMessage response = Client.SendAsync(request).Result;
@@ -111,8 +111,8 @@ namespace KISClient.Core
             HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, new Uri(combinedUriString));
             request.Content = new StringContent("", Encoding.UTF8, "application/json");
             request.Headers.Add("authorization", "Bearer " + this.AccessToken);
-            request.Headers.Add("appkey", this.AppKey);
-            request.Headers.Add("appsecret", this.AppSecret);
+            request.Headers.Add("appkey", this.Appkey);
+            request.Headers.Add("appsecret", this.Appsecret);
             request.Headers.Add("tr_id", "FHKST01010100");
 
             HttpResponseMessage response = Client.SendAsync(request).Result;
