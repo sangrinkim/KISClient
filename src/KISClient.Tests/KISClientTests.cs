@@ -33,5 +33,17 @@ namespace KISClient.Tests
 
             Assert.True(result, "Failed to get access token");
         }
+
+        [Fact]
+        public void RevokeTokenTest()
+        {
+            bool gotToken = client.GetAccessToken();
+            if (gotToken == true)
+            {
+                bool result = client.RevokeToken();
+
+                Assert.True(result, "Failed to revoke token");
+            }
+        }
     }
 }
