@@ -12,8 +12,8 @@ namespace KISClient.Tests
 
         public KISClientTests()
         {
-            string appkey = "PSSoSpLRLxRWUiei2Wg0nHITiVkzAvzA9ru1";
-            string appsecret = "2K4ye093wkZpB29RYCk6l54nYFmDaiR/5pUvBLE0oTjDxtVjfScwa2imWe57Lz+SUwriLc/uO3zQyCIX57J9cqwPQMhya+5NGrP2QR8WN8FqVK4mwyX/jiBtvFGuU3Y+Lc5DRR7V3E9w7gUjKQN/gnkUe2K4RtngrtHCnJOGizttCVkazu8=";
+            string appkey = "your appkey";
+            string appsecret = "your appsecret";
             client = new KISHttpClient(appkey, appsecret);
         }
 
