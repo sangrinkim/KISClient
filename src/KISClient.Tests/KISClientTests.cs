@@ -22,6 +22,7 @@ namespace KISClient.Tests
         {
             bool result = client.GetHashKey("your account no");
 
+            // Expected: True
             Assert.True(result, "Failed to get hashkey");
         }
 
@@ -31,18 +32,6 @@ namespace KISClient.Tests
             bool result = client.GetAccessToken();
 
             Assert.True(result, "Failed to get access token");
-        }
-
-        [Fact]
-        public void RevokeTokenTest()
-        {
-            bool gotToken = client.GetAccessToken();
-            if (gotToken == true)
-            {
-                bool result = client.RevokeToken();
-
-                Assert.True(result, "Failed to revoke token");
-            }
         }
     }
 }
