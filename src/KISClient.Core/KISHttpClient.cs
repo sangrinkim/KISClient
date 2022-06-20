@@ -5,8 +5,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Net.Mime;
+using System.Net.Http.Headers
 using System.Text;
 
 namespace KISClient.Core
@@ -68,10 +67,9 @@ namespace KISClient.Core
                                                 Encoding.UTF8);
 
             HttpResponseMessage response = Client.SendAsync(request).Result;
-            string responseString = null;
             if (response.IsSuccessStatusCode)
             {
-                responseString = response.Content.ReadAsStringAsync().Result;
+                string responseString = response.Content.ReadAsStringAsync().Result;
                 this.AccessToken = JsonConvert.DeserializeObject<AccessTokenModel>(responseString);
 
                 return true;
@@ -80,7 +78,7 @@ namespace KISClient.Core
             return false;
         }
 
-        public void RevokeToken()
+        public bool RevokeToken()
         {
             HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "/oauth2/revokeP");
             request.Content = new StringContent($"{{\"appkey\":\"{ this.Appkey }\", \"appsecret\":\"{ this.Appsecret }\", \"token\":\"{ this.AccessToken }\"}}",
@@ -92,12 +90,10 @@ namespace KISClient.Core
                 string resonseString = response.Content.ReadAsStringAsync().Result;
                 var responseData = (JObject)JsonConvert.DeserializeObject(resonseString);
 
-                Console.WriteLine("code: {0}, Message: {1}", responseData["code"], responseData["message"]);
+                return responseData["code"].ToString() == "200";
             }
-            else
-            {
-                Console.WriteLine("Fail: {0}", response.StatusCode);
-            }
+
+            return false;
         }
 
         public void GetStockPrice(string stockCode)
