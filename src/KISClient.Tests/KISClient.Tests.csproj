@@ -21,7 +21,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\KISClient.Core\KISClient.Core.csproj" />
-	<Content Include="xunit.runner.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>
