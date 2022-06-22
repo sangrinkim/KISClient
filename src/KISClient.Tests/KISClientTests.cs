@@ -14,6 +14,7 @@ namespace KISClient.Tests
         {
             string appkey = "your appkey";
             string appsecret = "your appsecret";
+
             client = new KISHttpClient(appkey, appsecret);
         }
 
@@ -44,6 +45,16 @@ namespace KISClient.Tests
 
                 Assert.True(result, "Failed to revoke token");
             }
+        }
+
+        [Fact]
+        public void GetStockPriceTest()
+        {
+            GetAccessTokenTest();
+
+            string result = client.GetStockPrice("009150");
+
+            Assert.True(result != null, result);
         }
     }
 }
