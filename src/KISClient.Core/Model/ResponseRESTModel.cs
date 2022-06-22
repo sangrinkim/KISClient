@@ -5,7 +5,7 @@ using System.Text;
 
 namespace KISClient.Core.Model
 {
-    public class ResponseRESTModel : BaseModel
+    public class ResponseRESTModel<T> : BaseModel
     {
         /// <summary>
         /// 0: Success
@@ -20,6 +20,7 @@ namespace KISClient.Core.Model
         [JsonProperty("msg1")]
         public string Message { get; set; }
 
-        //output
+        [JsonProperty("output")]
+        public List<T> Output { get; set; }
     }
 }
