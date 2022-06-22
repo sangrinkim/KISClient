@@ -12,5 +12,10 @@ namespace KISClient.Core.Model
 
         [JsonProperty("token_type")]
         public string TokenType { get; set; }
+
+        public string GetAuthorizationString()
+        {
+            return string.Format("{0} {1}", this.TokenType, this.AccessToken);
+        }
     }
 }
