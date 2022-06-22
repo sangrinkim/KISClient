@@ -81,7 +81,7 @@ namespace KISClient.Core
         public bool RevokeToken()
         {
             HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "/oauth2/revokeP");
-            request.Content = new StringContent($"{{\"appkey\":\"{ this.Appkey }\", \"appsecret\":\"{ this.Appsecret }\", \"token\":\"{ this.AccessToken }\"}}",
+            request.Content = new StringContent($"{{\"appkey\":\"{ this.Appkey }\", \"appsecret\":\"{ this.Appsecret }\", \"token\":\"{ this.AccessToken.AccessToken }\"}}",
                                                 Encoding.UTF8);
 
             HttpResponseMessage response = Client.SendAsync(request).Result;
@@ -96,7 +96,7 @@ namespace KISClient.Core
             return false;
         }
 
-        public void GetStockPrice(string stockCode)
+        public string GetStockPrice(string stockCode)
         {
             Dictionary<string, string> paramDic = new Dictionary<string, string>();
             paramDic.Add("FID_COND_MRKT_DIV_CODE", "J");
@@ -105,7 +105,7 @@ namespace KISClient.Core
             var combinedUriString = QueryHelpers.AddQueryString(REAL_SERVER_URL + "uapi/domestic-stock/v1/quotations/inquire-price", paramDic);
             HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, new Uri(combinedUriString));
             request.Content = new StringContent("", Encoding.UTF8, "application/json");
-            request.Headers.Add("authorization", "Bearer " + this.AccessToken);
+            request.Headers.Add("authorization", this.AccessToken.GetAuthorizationString());
             request.Headers.Add("appkey", this.Appkey);
             request.Headers.Add("appsecret", this.Appsecret);
             request.Headers.Add("tr_id", "FHKST01010100");
@@ -113,14 +113,12 @@ namespace KISClient.Core
             HttpResponseMessage response = Client.SendAsync(request).Result;
             if (response.IsSuccessStatusCode)
             {
-                string resonseString = response.Content.ReadAsStringAsync().Result;
+                string responseString = response.Content.ReadAsStringAsync().Result;
 
-                Console.WriteLine(resonseString);
+                return responseString;
             }
-            else
-            {
-                Console.WriteLine("Fail: {0}", response.StatusCode);
-            }
+
+            return null;
         }
     }
 }
