@@ -21,6 +21,6 @@ namespace KISClient.Core.Model
         public string Message { get; set; }
 
         [JsonProperty("output")]
-        public List<T> Output { get; set; }
+        public T Output { get; set; }
     }
 }

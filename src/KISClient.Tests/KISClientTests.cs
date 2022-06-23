@@ -52,9 +52,9 @@ namespace KISClient.Tests
         {
             GetAccessTokenTest();
 
-            string result = client.GetStockPrice("009150");
+            var result = client.GetStockPrice("009150");
 
-            Assert.True(result != null, result);
+            Assert.True(result != null, result.Output.LastPrice);
         }
     }
 }

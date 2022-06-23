@@ -96,7 +96,7 @@ namespace KISClient.Core
             return false;
         }
 
-        public string GetStockPrice(string stockCode)
+        public ResponseRESTModel<StockLastPriceModel> GetStockPrice(string stockCode)
         {
             Dictionary<string, string> paramDic = new Dictionary<string, string>();
             paramDic.Add("FID_COND_MRKT_DIV_CODE", "J");
@@ -114,8 +114,9 @@ namespace KISClient.Core
             if (response.IsSuccessStatusCode)
             {
                 string responseString = response.Content.ReadAsStringAsync().Result;
+                var result = JsonConvert.DeserializeObject<ResponseRESTModel<StockLastPriceModel>>(responseString);
 
-                return responseString;
+                return result;
             }
 
             return null;
