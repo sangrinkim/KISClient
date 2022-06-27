@@ -115,6 +115,7 @@ namespace KISClient.Core
             {
                 string responseString = response.Content.ReadAsStringAsync().Result;
                 var result = JsonConvert.DeserializeObject<ResponseRESTModel<StockLastPriceModel>>(responseString);
+                result.Output.StockCode = stockCode;
 
                 return result;
             }
