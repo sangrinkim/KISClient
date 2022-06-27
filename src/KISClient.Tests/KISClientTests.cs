@@ -53,8 +53,10 @@ namespace KISClient.Tests
             GetAccessTokenTest();
 
             var result = client.GetStockPrice("009150");
+            string test = string.Format("{0}: {1}, {2}", result.Output.StockCode, result.Output.LastPrice, result.Output.ChangeRate);
+            // result 009150: 135000, 3.05
 
-            Assert.True(result != null, result.Output.LastPrice);
+            Assert.True(result != null, test);
         }
     }
 }
