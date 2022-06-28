@@ -7,6 +7,7 @@ namespace KISClient.Core.Model
 {
     public class StockLastPriceModel : BaseModel
     {
+        [JsonProperty("stck_shrn_iscd")]
         public string StockCode { get; set; }
 
         [JsonProperty("stck_prpr")]
