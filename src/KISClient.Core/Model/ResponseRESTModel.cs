@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,16 +11,16 @@ namespace KISClient.Core.Model
         /// 0: Success
         /// other: Failure
         /// </summary>
-        [JsonProperty("rt_cd")]
+        [JsonPropertyName("rt_cd")]
         public string IsSuccessful { get; set; }
 
-        [JsonProperty("msg_cd")]
+        [JsonPropertyName("msg_cd")]
         public string MessageCode { get; set; }
 
-        [JsonProperty("msg1")]
+        [JsonPropertyName("msg1")]
         public string Message { get; set; }
 
-        [JsonProperty("output")]
+        [JsonPropertyName("output")]
         public T Output { get; set; }
     }
 }
